@@ -18,6 +18,7 @@ export const Text = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   flexWrap: 'wrap',
   width: '200px',
+  textAlign: 'center',
   color: theme.palette.secondary.main,
   fontSize: 20,
   fontWeight: 700,
