@@ -9,6 +9,7 @@ export const dark = createTheme({
     secondary: {
       main: '#F74346',
       contrastText: '#f1f1f1',
+      dark: '#2B2B38',
     },
   },
   components: {
@@ -31,6 +32,7 @@ export const dark = createTheme({
         body: {
           minWidth: 320,
           margin: 0,
+          backgroundColor: '#161621',
         },
         '#root': {
           position: 'relative',
@@ -50,8 +52,9 @@ export const dark = createTheme({
         main: {
           flexGrow: 1,
           position: 'relative',
-          overflow: 'hidden',
           paddingBottom: '20px',
+          marginTop: '65px',
+          overflow: 'hidden',
         },
       },
     },
