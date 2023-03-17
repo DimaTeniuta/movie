@@ -1,10 +1,9 @@
 import { styled } from '@mui/material';
-import Typography from '@mui/material/Typography/Typography';
-import { IImage } from './Card.types';
 
 export const Wrapper = styled('div')(() => ({
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'center',
   rowGap: 20,
 }));
 
@@ -16,6 +15,7 @@ export const Image = {
 
 export const Text = styled('div')(({ theme }) => ({
   display: 'flex',
+  justifyContent: 'center',
   flexWrap: 'wrap',
   width: '200px',
   color: theme.palette.secondary.main,

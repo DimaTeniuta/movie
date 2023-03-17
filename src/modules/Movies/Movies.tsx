@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import React, { useEffect, useState } from 'react';
 import { BoxWrapper } from '../../components/BoxWrapper';
 import { Card } from '../../components/Card';
