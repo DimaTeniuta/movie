@@ -12,7 +12,13 @@ export default {
 
 const Template: ComponentStory<typeof Card> = () => (
   <Box sx={{ width: 217 }}>
-    <Card image="https://image.tmdb.org/t/p/w500/qi9r5xBgcc9KTxlOLjssEbDgO0J.jpg">{'Plane'}</Card>
+    <Card
+      image="https://image.tmdb.org/t/p/w500/qi9r5xBgcc9KTxlOLjssEbDgO0J.jpg"
+      onClick={() => console.log('click')}
+      rating={8.2}
+    >
+      {'Plane'}
+    </Card>
   </Box>
 );
 

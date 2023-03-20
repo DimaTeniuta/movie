@@ -7,9 +7,15 @@ const mockData = {
   title: 'Test',
 };
 
+const mockClick = () => {};
+
 describe('Card', () => {
   it('render', () => {
-    render(<Card image={mockData.backdrop_path}>{mockData.title}</Card>);
+    render(
+      <Card image={mockData.backdrop_path} onClick={mockClick} rating={8.2}>
+        Click
+      </Card>
+    );
     expect(screen.queryByText('Test')).toBeInTheDocument();
     expect(screen.getByAltText('image')).toBeInTheDocument();
   });

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { BoxWrapper } from '../../components/BoxWrapper';
 import { SubmitButton } from '../../UI/SubmitButton';
 import { Search } from '../../UI/Search';
+import { store } from '../../store/root';
 import * as Styled from './SearchPanel.styles';
 
-export const SearchPanel = () => {
+export const SearchPanel = observer(() => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +15,8 @@ export const SearchPanel = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(111, e.target);
+    store.movies.setSearchQuery(searchValue);
+    store.movies.fetchMovies();
   };
 
   return (
@@ -26,4 +29,4 @@ export const SearchPanel = () => {
       </form>
     </BoxWrapper>
   );
-};
+});

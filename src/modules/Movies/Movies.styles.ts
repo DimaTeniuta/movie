@@ -14,3 +14,10 @@ export const WrapPagination = styled('div')(() => ({
   flexWrap: 'wrap',
   paddingBottom: 30,
 }));
+
+export const paginationStyles = {
+  '& .MuiPaginationItem-root': {
+    color: 'primary.contrastText',
+    borderColor: 'primary.contrastText',
+  },
+};
