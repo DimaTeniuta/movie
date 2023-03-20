@@ -9,5 +9,4 @@ class RootStore {
   }
 }
 
-// export type { RootStore };
 export const store = new RootStore();

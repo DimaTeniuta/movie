@@ -110,7 +110,7 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/index.tsx",
-      "!src/**/*.{stories.ts,stories.tsx}"
+      "!src/**/*.{stories.ts,stories.tsx,styles.ts}"
     ]
   }
 }
