@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { fetchMovies } from '../API/fetchMovies';
+
 import { IMovie, IMovieResult } from '../types/movie';
 import { FlowReturnFetchMovies } from './types';
 

@@ -13,7 +13,6 @@ const API_IMG = 'https://image.tmdb.org/t/p/w500/';
 export const Movies = observer(() => {
   const data = store.movies.movies;
   const page = store.movies.page;
-  console.log(data.results);
 
   useEffect(() => {
     store.movies.fetchMovies();
