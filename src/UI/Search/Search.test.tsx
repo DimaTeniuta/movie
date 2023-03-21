@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import { Search } from './Search';
 
 const MockFuncComp = () => {
@@ -23,9 +24,13 @@ describe('Search', () => {
     render(<MockFuncComp />);
     const input = screen.getByPlaceholderText(/search/i);
     const testValue = 'test';
-    userEvent.type(input, testValue);
+    act(() => {
+      userEvent.type(input, testValue);
+    });
     expect(screen.getByDisplayValue(testValue)).toBeInTheDocument();
-    userEvent.clear(input);
+    act(() => {
+      userEvent.clear(input);
+    });
     expect(input).toHaveValue('');
   });
 });

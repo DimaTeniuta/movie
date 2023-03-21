@@ -14,6 +14,8 @@ export const Movies = observer(() => {
   const data = store.movies.movies;
   const page = store.movies.page;
 
+  console.log(111, data);
+
   useEffect(() => {
     store.movies.fetchMovies();
   }, []);
