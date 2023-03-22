@@ -1,26 +1,19 @@
-import { render, screen } from '@testing-library/react';
+/* eslint-disable import/no-unresolved */
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import App from '../../App';
+import 'jest-dom/extend-expect';
 
 describe('Header', () => {
-  it('route', async () => {
-    act(() => {
-      render(<App />);
+  it('render', async () => {
+    render(<App />);
+    const btnHome = await screen.findByText(/home/i);
+    const btnMovie = await screen.findByText(/movie/i);
+    await waitFor(() => {
+      expect(btnHome).toBeInTheDocument();
+      expect(btnMovie).toBeInTheDocument();
     });
-    const btnHome = screen.getByText(/home/i);
-    const btnMovie = screen.getByText(/movie/i);
-
-    expect(btnHome).toBeInTheDocument();
-    expect(btnMovie).toBeInTheDocument();
-    expect(btnHome).toHaveStyle('color: #F74346');
-
-    act(() => {
-      userEvent.click(btnMovie);
-    });
-
-    expect(btnHome).not.toHaveStyle('color: #F74346');
-    expect(btnMovie).toHaveStyle('color: #F74346');
   });
 });

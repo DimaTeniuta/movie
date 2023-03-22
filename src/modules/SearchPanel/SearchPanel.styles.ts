@@ -8,3 +8,11 @@ export const WrapContent = styled('div')(() => ({
   gap: 30,
   padding: 30,
 }));
+
+export const WrapSlider = styled('div')(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  flexWrap: 'wrap',
+  gap: 10,
+}));

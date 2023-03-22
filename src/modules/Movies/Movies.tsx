@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
@@ -6,15 +7,19 @@ import { Card } from '../../components/Card';
 import { store } from '../../store/root';
 import { IMovieResult } from '../../types/movie';
 import { Spinner } from '../../UI/Spinner';
+import { sortMovies } from './helpers/sort';
 import * as Styled from './Movies.styles';
 
 const API_IMG = 'https://image.tmdb.org/t/p/w500/';
 
 export const Movies = observer(() => {
-  const data = store.movies.movies;
-  const page = store.movies.page;
+  const data = sortMovies(
+    store.movies.movies.results,
+    store.sortMovies.rating[0],
+    store.sortMovies.rating[1]
+  );
 
-  console.log(111, data);
+  const page = store.movies.page;
 
   useEffect(() => {
     store.movies.fetchMovies();
@@ -32,8 +37,8 @@ export const Movies = observer(() => {
   return (
     <BoxWrapper sx={{ position: 'relative' }}>
       <Styled.WrapCard>
-        {data?.results.length ? (
-          data.results.map((movie) => (
+        {data?.length ? (
+          data.map((movie) => (
             <Card
               image={API_IMG + movie.poster_path}
               key={movie.id}
@@ -44,15 +49,15 @@ export const Movies = observer(() => {
             </Card>
           ))
         ) : (
-          <Spinner />
+          <Typography sx={{ color: 'primary.contrastText' }}>There is no data</Typography>
         )}
         {store.movies.isLoading && <Spinner />}
       </Styled.WrapCard>
 
-      {data?.results.length && (
+      {data?.length && (
         <Styled.WrapPagination>
           <Pagination
-            count={data?.total_pages}
+            count={store.movies.movies?.total_pages}
             variant="outlined"
             disabled={store.movies.isLoading}
             sx={Styled.paginationStyles}

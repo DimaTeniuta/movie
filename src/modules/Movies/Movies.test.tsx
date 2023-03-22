@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { fetchMovies } from '../../API/fetchMovies';
 import { store } from '../../store';
 import { Movies } from './Movies';
 
@@ -42,21 +43,21 @@ const mockData = {
       vote_count: 0,
     },
   ],
-  totalPages: 5,
-  total_results: 93,
+  totalPages: 2,
+  total_results: 20,
 };
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve(mockData),
-  })
-) as jest.Mock;
+// global.fetch = jest.fn(() =>
+//   Promise.resolve({
+//     json: () => Promise.resolve(mockData),
+//   })
+// ) as jest.Mock;
 
 describe('Movies', () => {
   it('render', async () => {
     await waitFor(() => {
       render(<Movies />);
     });
-    expect(fetch).toBeCalledTimes(1);
+    expect(fetchMovies).toBeCalledTimes(1);
   });
 });
