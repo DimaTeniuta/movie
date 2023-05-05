@@ -6,7 +6,6 @@ import { SubmitButton } from '../../UI/SubmitButton';
 import { Search } from '../../UI/Search';
 import { store } from '../../store/root';
 import { RangeSlider } from '../../UI/RangeSlider';
-import { Select } from '../../UI/Select';
 import * as Styled from './SearchPanel.styles';
 
 export const SearchPanel = observer(() => {
@@ -32,7 +31,9 @@ export const SearchPanel = observer(() => {
         <Styled.WrapContent>
           <Search value={searchValue} onChange={handleChangeSearch} />
           <SubmitButton>Search</SubmitButton>
+        </Styled.WrapContent>
 
+        <Styled.WrapContent>
           <Styled.WrapSlider>
             <Typography sx={{ color: 'primary.contrastText' }}>Rating:</Typography>
             <RangeSlider
@@ -42,8 +43,6 @@ export const SearchPanel = observer(() => {
               max={10}
             />
           </Styled.WrapSlider>
-
-          <Select />
         </Styled.WrapContent>
       </form>
     </BoxWrapper>
