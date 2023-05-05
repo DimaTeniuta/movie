@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BoxWrapper } from '../../components/BoxWrapper';
 import { Card } from '../../components/Card';
 import { store } from '../../store/root';
@@ -13,13 +14,13 @@ import * as Styled from './Movies.styles';
 const API_IMG = 'https://image.tmdb.org/t/p/w500/';
 
 export const Movies = observer(() => {
+  const navigate = useNavigate();
+
   const data = sortMovies(
     store.movies.movies.results,
     store.sortMovies.rating[0],
     store.sortMovies.rating[1]
   );
-
-  const page = store.movies.page;
 
   useEffect(() => {
     store.movies.fetchMovies();
@@ -31,7 +32,10 @@ export const Movies = observer(() => {
   };
 
   const handleCardClick = (movie: IMovieResult) => {
-    return () => store.movies.setMovie(movie);
+    return () => {
+      store.movies.setMovie(movie);
+      navigate(`/movie/${movie.id}`);
+    };
   };
 
   return (
@@ -54,7 +58,7 @@ export const Movies = observer(() => {
         {store.movies.isLoading && <Spinner />}
       </Styled.WrapCard>
 
-      {data?.length && (
+      {store.movies.movies.results && (
         <Styled.WrapPagination>
           <Pagination
             count={store.movies.movies?.total_pages}
@@ -62,7 +66,7 @@ export const Movies = observer(() => {
             disabled={store.movies.isLoading}
             sx={Styled.paginationStyles}
             color="secondary"
-            page={page}
+            page={store.movies.page}
             onChange={handleChangePage}
           />
         </Styled.WrapPagination>

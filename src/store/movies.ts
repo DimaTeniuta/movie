@@ -5,11 +5,11 @@ import { IMovie, IMovieResult } from '../types/movie';
 import { FlowReturnFetchMovies } from './types';
 
 class Movies {
-  movies: IMovie = { page: 0, results: [], total_pages: 0, total_results: 0 };
-  movie: IMovieResult | null = null;
-  page = 1;
-  searchQuery = 'popular';
-  isLoading = false;
+  public movies: IMovie = { page: 0, results: [], total_pages: 0, total_results: 0 };
+  public movie: IMovieResult | null = null;
+  public page = 1;
+  public searchQuery = 'popular';
+  public isLoading = false;
 
   public constructor() {
     makeAutoObservable(this);
