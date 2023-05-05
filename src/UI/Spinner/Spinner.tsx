@@ -16,7 +16,7 @@ export const Spinner = () => {
         alignItems: 'center',
       }}
     >
-      <CircularProgress />
+      <CircularProgress color="secondary" />
     </Box>
   );
 };

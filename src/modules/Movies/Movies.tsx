@@ -1,14 +1,72 @@
-import React, { useEffect, useState } from 'react';
+import { Typography } from '@mui/material';
+import Pagination from '@mui/material/Pagination';
+import { observer } from 'mobx-react-lite';
+import React, { useEffect } from 'react';
 import { BoxWrapper } from '../../components/BoxWrapper';
+import { Card } from '../../components/Card';
+import { store } from '../../store/root';
+import { IMovieResult } from '../../types/movie';
+import { Spinner } from '../../UI/Spinner';
+import { sortMovies } from './helpers/sort';
+import * as Styled from './Movies.styles';
 
-export const Movies = () => {
-  const [data, setData] = useState([]);
-  console.log(data);
+const API_IMG = 'https://image.tmdb.org/t/p/w500/';
 
-  //   useEffect(() => {
-  //     fetch('https://api.themoviedb.org/3/movie/popular?api_key=db2a4c48afddc2ca40ced287915ab169')
-  //       .then((res) => res.json())
-  //       .then((data) => setData(data));
-  //   }, []);
-  return <BoxWrapper>movies</BoxWrapper>;
-};
+export const Movies = observer(() => {
+  const data = sortMovies(
+    store.movies.movies.results,
+    store.sortMovies.rating[0],
+    store.sortMovies.rating[1]
+  );
+
+  const page = store.movies.page;
+
+  useEffect(() => {
+    store.movies.fetchMovies();
+  }, []);
+
+  const handleChangePage = async (_: React.ChangeEvent<unknown>, value: number) => {
+    store.movies.setPage(value);
+    store.movies.fetchMovies();
+  };
+
+  const handleCardClick = (movie: IMovieResult) => {
+    return () => store.movies.setMovie(movie);
+  };
+
+  return (
+    <BoxWrapper sx={{ position: 'relative' }}>
+      <Styled.WrapCard>
+        {data?.length ? (
+          data.map((movie) => (
+            <Card
+              image={API_IMG + movie.poster_path}
+              key={movie.id}
+              onClick={handleCardClick(movie)}
+              rating={movie.popularity}
+            >
+              {movie.title}
+            </Card>
+          ))
+        ) : (
+          <Typography sx={{ color: 'primary.contrastText' }}>There is no data</Typography>
+        )}
+        {store.movies.isLoading && <Spinner />}
+      </Styled.WrapCard>
+
+      {data?.length && (
+        <Styled.WrapPagination>
+          <Pagination
+            count={store.movies.movies?.total_pages}
+            variant="outlined"
+            disabled={store.movies.isLoading}
+            sx={Styled.paginationStyles}
+            color="secondary"
+            page={page}
+            onChange={handleChangePage}
+          />
+        </Styled.WrapPagination>
+      )}
+    </BoxWrapper>
+  );
+});

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { withRouter } from 'storybook-addon-react-router-v6';
 import { Header } from './Header';
